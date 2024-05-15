@@ -7,7 +7,8 @@
 
 #include <zappy_server.h>
 
-static void add_food_resource(struct char_tab_head *resource_list, int x, int y)
+static void add_food_resource(
+    struct char_tab_head *resource_list, int x, int y)
 {
     char_tab_t *resource = NULL;
 
@@ -18,7 +19,8 @@ static void add_food_resource(struct char_tab_head *resource_list, int x, int y)
     }
 }
 
-static void add_stone_resource_1(struct char_tab_head *resource_list, int x, int y)
+static void add_stone_resource_1(
+    struct char_tab_head *resource_list, int x, int y)
 {
     char_tab_t *resource = NULL;
 
@@ -39,7 +41,8 @@ static void add_stone_resource_1(struct char_tab_head *resource_list, int x, int
     }
 }
 
-static void add_stone_resource_2(struct char_tab_head *resource_list, int x, int y)
+static void add_stone_resource_2(
+    struct char_tab_head *resource_list, int x, int y)
 {
     char_tab_t *resource = NULL;
 
@@ -64,8 +67,8 @@ struct char_tab_head *generate_ressourse_list(int x, int y)
 {
     struct char_tab_head *resource_list =
         calloc(sizeof(struct char_tab_head), 1);
-    TAILQ_INIT(resource_list);
 
+    TAILQ_INIT(resource_list);
     add_food_resource(resource_list, x, y);
     add_stone_resource_1(resource_list, x, y);
     add_stone_resource_2(resource_list, x, y);

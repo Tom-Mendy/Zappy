@@ -20,29 +20,33 @@ static void help(void)
         "\tfreq\t\tis the reciprocal of time unit for execution of actions\n");
 }
 
+void clear_all(args_config_t *args, struct char_tab_head *resourse_list)
+{
+    free_args_config(args);
+    free_char_tab_list(resourse_list);
+    free(resourse_list);
+}
+
 int main(int argc, char **argv)
 {
     args_config_t *args = NULL;
+    struct char_tab_head *resourse_list = NULL;
 
     if (strcmp(argv[1], "-help") == 0) {
         help();
         return OK;
     }
     args = init_args_config();
-    if (args == NULL) {
+    if (args == NULL)
         return KO;
-    }
     if (fill_args_conf(args, argc, argv) == KO) {
         help();
         free_args_config(args);
         return KO;
     }
     display_args_config(args);
-    struct char_tab_head *test = generate_ressourse_list(args->width, args->height);
-    free_args_config(args);
-    display_char_tab_list(test);
-    free_char_tab_list(test);
-    free(test);
-
+    resourse_list = generate_ressourse_list(args->width, args->height);
+    display_char_tab_list(resourse_list);
+    clear_all(args, resourse_list);
     return OK;
 }

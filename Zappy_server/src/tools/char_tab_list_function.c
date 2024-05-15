@@ -30,13 +30,10 @@ void display_char_tab_list(struct char_tab_head *head)
 int count_char_tab_list(struct char_tab_head *head)
 {
     char_tab_t *n1 = TAILQ_FIRST(head);
-    int i = 0;
+    int count = 0;
 
-    while (n1 != NULL) {
-        i++;
-        n1 = TAILQ_NEXT(n1, next);
-    }
-    return i;
+    TAILQ_FOREACH(n1, head, next) { count += 1; }
+    return count;
 }
 
 void random_char_tab_list(struct char_tab_head *head)
