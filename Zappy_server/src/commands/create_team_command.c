@@ -5,13 +5,13 @@
 ** create_command
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 static int write_new_team(int client_fd, team_t *new_team)
 {
     dprintf(client_fd, "200|/create%steam%s%s%s%s%s%s%s%s", END_LINE, END_LINE,
-            new_team->team_uuid, SPLIT_LINE, new_team->name, SPLIT_LINE,
-            new_team->desc, END_LINE, END_STR);
+        new_team->team_uuid, SPLIT_LINE, new_team->name, SPLIT_LINE,
+        new_team->desc, END_LINE, END_STR);
     return OK;
 }
 
@@ -43,17 +43,17 @@ static int create_team(teams_server_t *teams_server, char **command_line)
 }
 
 int add_team(teams_server_t *teams_server, char **command_line, int nb_args,
-             all_context_t *all_context)
+    all_context_t *all_context)
 {
     if (all_context->team == NULL) {
         if (4 != nb_args) {
             dprintf(teams_server->actual_sockfd, "500|Server Error%s%s",
-                    END_LINE, END_STR);
+                END_LINE, END_STR);
             return KO;
         }
         if (find_team(&(teams_server->all_teams), command_line[1]) == OK) {
             dprintf(teams_server->actual_sockfd, "503|/create%s%s", END_LINE,
-                    END_STR);
+                END_STR);
             return KO;
         }
         create_team(teams_server, command_line);

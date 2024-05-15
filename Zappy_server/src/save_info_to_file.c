@@ -5,7 +5,7 @@
 ** save_info_to_file
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -24,8 +24,8 @@ static void save_users(struct userhead *user_head, int file, char *str)
     }
 }
 
-static void save_privates_messages(struct messagehead *message_head, int file,
-                                   char *str)
+static void save_privates_messages(
+    struct messagehead *message_head, int file, char *str)
 {
     message_t *new_message = NULL;
 
@@ -39,8 +39,8 @@ static void save_privates_messages(struct messagehead *message_head, int file,
     }
 }
 
-static void save_subscribed(struct subscribedhead *subscribe_head, int file,
-                            char *str)
+static void save_subscribed(
+    struct subscribedhead *subscribe_head, int file, char *str)
 {
     subscribed_t *new_subscribe = NULL;
 
@@ -119,8 +119,9 @@ int save_info_to_file(teams_server_t *teams_server)
     char str[BUFSIZ];
 
     memset(str, 0, BUFSIZ);
-    if (file == -1)
+    if (file == -1) {
         return ERROR;
+    }
     save_users(&teams_server->all_user, file, str);
     save_privates_messages(&teams_server->private_messages, file, str);
     save_subscribed(&teams_server->subscribed_teams_users, file, str);

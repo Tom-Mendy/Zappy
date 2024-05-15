@@ -57,12 +57,10 @@ static void subscribed_teams(char **info)
 
 static void subscribed_users(char **info)
 {
-    int user_status = 0;
     char *user_uuid = NULL;
     char *user_name = NULL;
 
     for (int i = 2; info[i] != NULL; i++) {
-        user_status = atoi(get_msg_up_to_char(info[i], *SPLIT_LINE, 0));
         user_uuid = get_msg_up_to_char(info[i], *SPLIT_LINE, 2);
         user_name = get_msg_after_nb(info[i], (int)strlen(user_uuid) + 3);
         do_multiple_frees(user_uuid, user_name, NULL, NULL);

@@ -5,7 +5,7 @@
 ** my_project
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
@@ -14,8 +14,9 @@ static bool loopRunning = true;
 
 void signal_handler(int signal)
 {
-    if (signal == SIGINT)
+    if (signal == SIGINT) {
         loopRunning = false;
+    }
 }
 
 static int check_connected_client(teams_server_t *teams_server)
@@ -32,8 +33,9 @@ static int check_connected_client(teams_server_t *teams_server)
 static int fd_is_set(teams_server_t *teams_server)
 {
     if (FD_ISSET(teams_server->actual_sockfd, &teams_server->fd.input)) {
-        if (check_connected_client(teams_server) == ERROR)
+        if (check_connected_client(teams_server) == ERROR) {
             return ERROR;
+        }
         return OK;
     }
     return OK;
@@ -42,10 +44,11 @@ static int fd_is_set(teams_server_t *teams_server)
 int send_logout_to_all_clients(teams_server_t *teams_server)
 {
     for (teams_server->actual_sockfd = 0;
-         teams_server->actual_sockfd < __FD_SETSIZE;
-         teams_server->actual_sockfd += 1) {
-        if (fd_is_set(teams_server) == ERROR)
+        teams_server->actual_sockfd < __FD_SETSIZE;
+        teams_server->actual_sockfd += 1) {
+        if (fd_is_set(teams_server) == ERROR) {
             return ERROR;
+        }
     }
     return OK;
 }
@@ -68,17 +71,20 @@ int myteams_server(int port)
     teams_server_t *teams_server = calloc(sizeof(teams_server_t), 1);
 
     signal(SIGINT, signal_handler);
-    if (init_server(teams_server, port) == KO)
+    if (init_server(teams_server, port) == KO) {
         return ERROR;
+    }
     read_info_from_save_file(teams_server);
     while (loopRunning) {
         teams_server->fd.input = teams_server->fd.save_input;
         if (select(FD_SETSIZE, &(teams_server->fd.input),
-                   &(teams_server->fd.ouput), NULL, NULL) == KO &&
-            loopRunning)
+                &(teams_server->fd.ouput), NULL, NULL) == KO &&
+            loopRunning) {
             return ERROR;
-        if (loopRunning && scan_fd(teams_server) == ERROR)
+        }
+        if (loopRunning && scan_fd(teams_server) == ERROR) {
             return ERROR;
+        }
     }
     close_server(teams_server);
     return OK;

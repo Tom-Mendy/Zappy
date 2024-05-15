@@ -5,13 +5,14 @@
 ** accept_new_connection
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 int accept_new_connection(int my_socket)
 {
     int client_sockfd = accept(my_socket, NULL, NULL);
 
-    if (client_sockfd == -1)
+    if (client_sockfd == -1) {
         return ERROR;
+    }
     return client_sockfd;
 }

@@ -5,7 +5,7 @@
 ** get_thread_by_uuid
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 thread_t *get_thread_by_uuid(struct threadhead *thread_head, char *uuid)
 {
@@ -13,8 +13,9 @@ thread_t *get_thread_by_uuid(struct threadhead *thread_head, char *uuid)
 
     TAILQ_FOREACH(thread, thread_head, next)
     {
-        if (strcmp(thread->thread_uuid, uuid) == 0)
+        if (strcmp(thread->thread_uuid, uuid) == 0) {
             return thread;
+        }
     }
     return NULL;
 }
@@ -30,8 +31,9 @@ thread_t *get_all_thread_by_uuid(struct teamhead *team_head, char *uuid)
         TAILQ_FOREACH(channel, &team->channels_head, next)
         {
             thread = get_thread_by_uuid(&channel->threads_head, uuid);
-            if (thread != NULL)
+            if (thread != NULL) {
                 return thread;
+            }
         }
     }
     return NULL;

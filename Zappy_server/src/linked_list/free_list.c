@@ -5,7 +5,7 @@
 ** free the list
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 #include <stdlib.h>
 
 void free_messages(struct messagehead *head)
@@ -39,8 +39,9 @@ void free_threads(struct threadhead *head)
 
     while (n1 != NULL) {
         n2 = n1;
-        if (TAILQ_EMPTY(&n2->replys_head) == 0)
+        if (TAILQ_EMPTY(&n2->replys_head) == 0) {
             free_reply(&n2->replys_head);
+        }
         n1 = TAILQ_NEXT(n1, next);
         free(n2);
     }
@@ -54,8 +55,9 @@ void free_channels(struct channelhead *head)
     while (n1 != NULL) {
         n2 = n1;
         n1 = TAILQ_NEXT(n1, next);
-        if (TAILQ_EMPTY(&n2->threads_head) == 0)
+        if (TAILQ_EMPTY(&n2->threads_head) == 0) {
             free_threads(&n2->threads_head);
+        }
         free(n2);
     }
 }
@@ -67,8 +69,9 @@ void free_teams(struct teamhead *head)
 
     while (n1 != NULL) {
         n2 = n1;
-        if (TAILQ_EMPTY(&n2->channels_head) == 0)
+        if (TAILQ_EMPTY(&n2->channels_head) == 0) {
             free_channels(&n2->channels_head);
+        }
         n1 = TAILQ_NEXT(n1, next);
         free(n2);
     }

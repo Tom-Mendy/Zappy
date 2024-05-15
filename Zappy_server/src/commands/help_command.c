@@ -5,13 +5,13 @@
 ** help_command
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 static int handle_error(teams_server_t *teams_server, char *command)
 {
     if (teams_server->clients[teams_server->actual_sockfd].user == NULL) {
         dprintf(teams_server->actual_sockfd, "502|Unauthorized action%s%s",
-                END_LINE, END_STR);
+            END_LINE, END_STR);
         return KO;
     }
     if (strlen(command) != 0) {
@@ -22,11 +22,12 @@ static int handle_error(teams_server_t *teams_server, char *command)
     return OK;
 }
 
-void help_command(teams_server_t *teams_server,
-                  char __attribute__((unused)) * command)
+void help_command(
+    teams_server_t *teams_server, char __attribute__((unused)) * command)
 {
-    if (handle_error(teams_server, command) == KO)
+    if (handle_error(teams_server, command) == KO) {
         return;
+    }
     dprintf(teams_server->actual_sockfd, "214|/help%s", END_LINE);
     dprintf(teams_server->actual_sockfd, "COMMANDS:\n/help\n/login [\"userna");
     dprintf(teams_server->actual_sockfd, "me\"]\n/logout\n/users\n/user [\"u");

@@ -5,14 +5,15 @@
 ** send_command
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 message_t *create_message(char *sender_uuid, char *receiver_uuid, char *text)
 {
     message_t *message = malloc(sizeof(message_t));
 
-    if (!message)
+    if (!message) {
         return NULL;
+    }
     strcpy(message->sender_uuid, sender_uuid);
     strcpy(message->receiver_uuid, receiver_uuid);
     strcpy(message->text, text);
@@ -21,15 +22,14 @@ message_t *create_message(char *sender_uuid, char *receiver_uuid, char *text)
     return message;
 }
 
-static int send_message_receiver(teams_server_t *teams_server,
-                                 user_t *receiver_user, char *message_body)
+static int send_message_receiver(
+    teams_server_t *teams_server, user_t *receiver_user, char *message_body)
 {
     for (int i = 4; i < FD_SETSIZE; i += 1) {
         if (teams_server->clients[i].user &&
             strcmp(teams_server->clients[i].user->uuid, receiver_user->uuid) ==
                 0) {
-            dprintf(
-                i, "200|/send%s%s%s%s%s%s", END_LINE,
+            dprintf(i, "200|/send%s%s%s%s%s%s", END_LINE,
                 teams_server->clients[teams_server->actual_sockfd].user->uuid,
                 SPLIT_LINE, message_body, END_LINE, END_STR);
             return OK;
@@ -44,8 +44,9 @@ static int loop_user(teams_server_t *teams_server, char **parsed_command)
         get_user_by_uuid(&teams_server->all_user, parsed_command[1]);
     message_t *message = NULL;
 
-    if (receiver_user == NULL)
+    if (receiver_user == NULL) {
         return KO;
+    }
     message = create_message(
         teams_server->clients[teams_server->actual_sockfd].user->uuid,
         receiver_user->uuid, parsed_command[3]);
@@ -58,8 +59,9 @@ char **parse_command(char *command)
 {
     char **parsed_command = splitter(command, "\"");
 
-    if (get_len_char_tab(parsed_command) != 4)
+    if (get_len_char_tab(parsed_command) != 4) {
         return NULL;
+    }
     return parsed_command;
 }
 
@@ -67,7 +69,7 @@ static int handle_error(teams_server_t *teams_server, char **parsed_command)
 {
     if (teams_server->clients[teams_server->actual_sockfd].user == NULL) {
         dprintf(teams_server->actual_sockfd, "502|Unauthorized action%s%s",
-                END_LINE, END_STR);
+            END_LINE, END_STR);
         return KO;
     }
     if (!parsed_command) {

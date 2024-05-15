@@ -5,7 +5,7 @@
 ** init_fd_struct
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 static void init_fd_struct(fd_t *fd, int my_socket)
 {
@@ -29,8 +29,9 @@ void init_list(teams_server_t *teams_server)
 
 int init_server(teams_server_t *teams_server, int port)
 {
-    if (teams_server == NULL)
+    if (teams_server == NULL) {
         return ERROR;
+    }
     teams_server->my_socket = setup_server(port, 42);
     if (teams_server->my_socket == -1) {
         printf("can't open server port\n");

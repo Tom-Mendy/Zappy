@@ -5,13 +5,13 @@
 ** use_command
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 int handle_errors(teams_server_t *teams_server, char *command)
 {
     if (teams_server->clients[teams_server->actual_sockfd].user == NULL) {
         dprintf(teams_server->actual_sockfd, "502|Unauthorized action%s%s",
-                END_LINE, END_STR);
+            END_LINE, END_STR);
         return 1;
     }
     if (count_str_char(command, '\"') != 0 &&
@@ -38,22 +38,22 @@ int fill_context_2(teams_server_t *teams_server, char **split_command)
 {
     if (get_array_len(split_command) == 4) {
         strcpy(teams_server->clients[teams_server->actual_sockfd]
-                   .user->team_context,
-               split_command[1]);
+                .user->team_context,
+            split_command[1]);
         strcpy(teams_server->clients[teams_server->actual_sockfd]
-                   .user->channel_context,
-               split_command[3]);
+                .user->channel_context,
+            split_command[3]);
     }
     if (get_array_len(split_command) == 6) {
         strcpy(teams_server->clients[teams_server->actual_sockfd]
-                   .user->team_context,
-               split_command[1]);
+                .user->team_context,
+            split_command[1]);
         strcpy(teams_server->clients[teams_server->actual_sockfd]
-                   .user->channel_context,
-               split_command[3]);
+                .user->channel_context,
+            split_command[3]);
         strcpy(teams_server->clients[teams_server->actual_sockfd]
-                   .user->thread_context,
-               split_command[5]);
+                .user->thread_context,
+            split_command[5]);
     }
     return 0;
 }
@@ -66,19 +66,16 @@ int fill_context(teams_server_t *teams_server, char *command)
         teams_server->clients[teams_server->actual_sockfd].user->team_context,
         0, MAX_UUID_LENGTH);
     memset(teams_server->clients[teams_server->actual_sockfd]
-               .user->channel_context,
-           0, MAX_UUID_LENGTH);
-    memset(
-        teams_server->clients[teams_server->actual_sockfd].user->thread_context,
-        0, MAX_UUID_LENGTH);
+            .user->channel_context, 0, MAX_UUID_LENGTH);
+    memset(teams_server->clients[teams_server->actual_sockfd]
+            .user->thread_context, 0, MAX_UUID_LENGTH);
     if (split_command == NULL) {
         free_array(split_command);
         return 1;
     }
     if (get_array_len(split_command) == 2) {
         strcpy(teams_server->clients[teams_server->actual_sockfd]
-                   .user->team_context,
-               split_command[1]);
+                .user->team_context, split_command[1]);
     }
     fill_context_2(teams_server, split_command);
     free_array(split_command);

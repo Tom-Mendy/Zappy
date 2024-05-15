@@ -7,7 +7,6 @@
 
 SRC			=	myteams_server.c					\
 				handle_client.c						\
-				splitter.c							\
 				scan_fd.c							\
 				init_server.c						\
 				generate_random_uuid.c				\
@@ -15,18 +14,23 @@ SRC			=	myteams_server.c					\
 				setup_server.c						\
 				save_info_to_file.c					\
 				read_info_from_save_file.c			\
-				free_array.c						\
 				search_in_object.c					\
-				get_len_char_tab.c					\
 				find_all_context.c					\
-				get_actual_time.c					\
 				get_user_by_uuid.c					\
 				get_team_by_uuid.c					\
 				get_channel_by_uuid.c				\
 				get_thread_by_uuid.c				\
 				linked_list/free_list.c				\
 				linked_list/free_users.c			\
+				argument_function.c					\
+				${DIR_TOOLS}						\
 				${DIR_COMMAND}
+
+TOOLS		=	splitter.c						\
+				free_array.c					\
+				get_len_char_tab.c				\
+				char_tab_list_function.c
+
 
 COMMAND		=	help_command.c						\
 				login_command.c						\
@@ -49,6 +53,8 @@ COMMAND		=	help_command.c						\
 DIR_SRC		=	$(addprefix src/, $(SRC))
 
 DIR_COMMAND	=	$(addprefix commands/, $(COMMAND))
+
+DIR_TOOLS	=	$(addprefix tools/, $(TOOLS))
 
 MAIN		=	main.c						\
 
@@ -80,7 +86,8 @@ $(NAME):	$(LIBS) $(OBJ)
 all: $(NAME)
 
 debug:
-		gcc -o $(NAME) $(DIR_SRC) $(DIR_MAIN) $(CPPFLAGS) $(LDLIBS) $(CFLAGS)  -ggdb3
+		gcc -o $(NAME) $(DIR_SRC) $(DIR_MAIN) $(CPPFLAGS) $(LDLIBS) $(CFLAGS)\
+			-ggdb3
 
 clean:
 		rm -f $(OBJ)

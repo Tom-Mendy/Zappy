@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2024
-** myteams
+** Zappy
 ** File description:
-** myteams_server
+** zappy_server
 */
 
-#ifndef MYTEAMS_SERVER_H_
-    #define MYTEAMS_SERVER_H_
+#ifndef ZAPPY_SERVER_H_
+    #define ZAPPY_SERVER_H_
 
     #include "../../include/myteams.h"
     #include <arpa/inet.h>
@@ -186,7 +186,7 @@ channel_t *search_in_channels(struct channelhead *channel_head, char *uuid);
 team_t *search_in_teams(struct teamhead *team_head, char *uuid);
 int get_len_char_tab(char **command);
 int find_all_context(teams_server_t *teams_server, team_t **team,
-                     channel_t **channel, thread_t **thread);
+    channel_t **channel, thread_t **thread);
 time_t get_actual_time(void);
 int count_str_char(char *str, char c);
 // get UUID
@@ -225,10 +225,41 @@ void list_command(teams_server_t *teams_server, char *command);
 void info_command(teams_server_t *teams_server, char *command);
 
 int add_team(teams_server_t *teams_server, char **command_line, int nb_args,
-             all_context_t *all_context);
+    all_context_t *all_context);
 int add_channel(teams_server_t *teams_server, char **command_line, int nb_args,
-                all_context_t *all_context);
+    all_context_t *all_context);
 int add_thread(teams_server_t *teams_server, char **command_line, int nb_args,
-               all_context_t *all_context);
+    all_context_t *all_context);
 
-#endif /* !MYTEAMS_SERVER_H_ */
+
+
+
+
+typedef struct char_tab_s {
+    char *str;
+    TAILQ_ENTRY(char_tab_s) next;
+} char_tab_t;
+
+struct char_tab_head {
+    struct char_tab_s *tqh_first;
+    struct char_tab_s **tqh_last;
+};
+
+void free_char_tab_list(struct char_tab_head *head);
+void display_char_tab_list(struct char_tab_head *head);
+
+typedef struct args_config_s {
+    int port;
+    int width;
+    int height;
+    int clientsNb;
+    float freq;
+    struct char_tab_head names;
+} args_config_t;
+
+args_config_t *init_args_config(void);
+void display_args_config(args_config_t *args);
+void free_args_config(args_config_t *args);
+int fill_args_conf(args_config_t *args, int argc, char **argv);
+
+#endif /* !ZAPPY_SERVER_H_ */

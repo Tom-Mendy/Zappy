@@ -1,3 +1,26 @@
+*.git
+
+*~
+*.log
+
+*.vscode
+*.editorconfig
+*.pdf
+*.swp
+
+unit*
+vgcore*
+tmp
+
+perso*
+Test.c
+
+myteams_cli
+myteams_save.txt
+myteams_server
+
+*intermediate
+
 # Prerequisites
 *.d
 
@@ -24,8 +47,6 @@
 
 # Shared objects (inc. Windows DLLs)
 *.dll
-*.so
-*.so.*
 *.dylib
 
 # Executables
@@ -50,3 +71,11 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+logging_client.h
+logging_server.h
+
+*.so
+
+save.txt
+notes.txt

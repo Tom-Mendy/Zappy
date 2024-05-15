@@ -5,12 +5,13 @@
 ** free_array
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 void free_array(char **array)
 {
-    if (array == NULL)
+    if (array == NULL) {
         return;
+    }
     for (int i = 0; array[i]; i++) {
         free(array[i]);
     }

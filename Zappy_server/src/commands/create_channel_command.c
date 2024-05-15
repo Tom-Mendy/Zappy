@@ -5,13 +5,13 @@
 ** create_command
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 static int write_new_channel(int client_fd, channel_t *new_channel)
 {
     dprintf(client_fd, "200|/create%schannel%s%s%s%s%s%s%s%s", END_LINE,
-            END_LINE, new_channel->channel_uuid, SPLIT_LINE, new_channel->name,
-            SPLIT_LINE, new_channel->desc, END_LINE, END_STR);
+        END_LINE, new_channel->channel_uuid, SPLIT_LINE, new_channel->name,
+        SPLIT_LINE, new_channel->desc, END_LINE, END_STR);
     return OK;
 }
 
@@ -29,7 +29,7 @@ static int find_channel(struct channelhead *all_channel, char *name)
 }
 
 static int create_channel(teams_server_t *teams_server, char **command_line,
-                          all_context_t *all_context)
+    all_context_t *all_context)
 {
     channel_t *new_channel = NULL;
 
@@ -46,18 +46,18 @@ static int create_channel(teams_server_t *teams_server, char **command_line,
 }
 
 int add_channel(teams_server_t *teams_server, char **command_line, int nb_args,
-                all_context_t *all_context)
+    all_context_t *all_context)
 {
     if (all_context->channel == NULL) {
         if (4 != nb_args) {
             dprintf(teams_server->actual_sockfd, "500|channel%s%s", END_LINE,
-                    END_STR);
+                END_STR);
             return KO;
         }
-        if (find_channel(&(all_context->team->channels_head),
-                         command_line[1]) == OK) {
+        if (find_channel(
+                &(all_context->team->channels_head), command_line[1]) == OK) {
             dprintf(teams_server->actual_sockfd, "503|/create%s%s", END_LINE,
-                    END_STR);
+                END_STR);
             return KO;
         }
         create_channel(teams_server, command_line, all_context);

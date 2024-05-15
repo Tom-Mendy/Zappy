@@ -5,7 +5,7 @@
 ** free the list
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 #include <stdlib.h>
 
 void free_subscribed(struct subscribedhead *head)
@@ -13,8 +13,9 @@ void free_subscribed(struct subscribedhead *head)
     subscribed_t *n1 = NULL;
     subscribed_t *n2 = NULL;
 
-    if (TAILQ_EMPTY(head) == 1)
+    if (TAILQ_EMPTY(head) == 1) {
         return;
+    }
     n1 = TAILQ_FIRST(head);
     while (n1 != NULL) {
         n2 = n1;
@@ -28,8 +29,9 @@ void free_users(struct userhead *head)
     user_t *n1 = NULL;
     user_t *n2 = NULL;
 
-    if (TAILQ_EMPTY(head) == 1)
+    if (TAILQ_EMPTY(head) == 1) {
         return;
+    }
     n1 = TAILQ_FIRST(head);
     while (n1 != NULL) {
         n2 = n1;

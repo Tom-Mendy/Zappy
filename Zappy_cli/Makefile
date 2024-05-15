@@ -66,7 +66,8 @@ $(NAME):	$(LIBS) $(OBJ)
 all: $(NAME)
 
 debug:
-	gcc -o $(NAME) $(DIR_SRC) $(DIR_MAIN) $(CPPFLAGS) $(CFLAGS) $(LDLIBS) -ggdb3
+	gcc -o $(NAME) $(DIR_SRC) $(DIR_MAIN) $(CPPFLAGS) $(CFLAGS) $(LDLIBS) \
+		-ggdb3
 
 clean:
 		rm -f $(OBJ)

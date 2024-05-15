@@ -5,7 +5,7 @@
 ** scan_fd
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 static int check_connection(teams_server_t *teams_server)
 {
@@ -28,8 +28,9 @@ static int check_connection(teams_server_t *teams_server)
 static int fd_is_set(teams_server_t *teams_server)
 {
     if (FD_ISSET(teams_server->actual_sockfd, &teams_server->fd.input)) {
-        if (check_connection(teams_server) == ERROR)
+        if (check_connection(teams_server) == ERROR) {
             return ERROR;
+        }
         return OK;
     }
     return OK;
@@ -37,10 +38,12 @@ static int fd_is_set(teams_server_t *teams_server)
 
 int scan_fd(teams_server_t *teams_server)
 {
-    for (teams_server->actual_sockfd = 0; teams_server->actual_sockfd <
-        __FD_SETSIZE; teams_server->actual_sockfd += 1) {
-        if (fd_is_set(teams_server) == ERROR)
+    for (teams_server->actual_sockfd = 0;
+        teams_server->actual_sockfd < __FD_SETSIZE;
+        teams_server->actual_sockfd += 1) {
+        if (fd_is_set(teams_server) == ERROR) {
             return ERROR;
+        }
     }
     return OK;
 }

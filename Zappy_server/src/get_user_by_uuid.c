@@ -5,7 +5,7 @@
 ** get_user_by_uuid
 */
 
-#include "myteams_server.h"
+#include "zappy_server.h"
 
 user_t *get_user_by_uuid(struct userhead *user_head, char *uuid)
 {
@@ -13,8 +13,9 @@ user_t *get_user_by_uuid(struct userhead *user_head, char *uuid)
 
     TAILQ_FOREACH(user, user_head, next)
     {
-        if (strcmp(user->uuid, uuid) == 0)
+        if (strcmp(user->uuid, uuid) == 0) {
             return user;
+        }
     }
     return NULL;
 }
