@@ -32,6 +32,15 @@
     #define REPLY_CHAR 'r'
     #define SUBSCRIBE_CHAR 's'
 
+    #define FOOD_DENSITY 0.5
+    #define LINEMATE_DENSITY 0.3
+    #define DERAUMERE_DENSITY 0.15
+    #define SIBUR_DENSITY 0.1
+    #define MENDIANE_DENSITY 0.1
+    #define PHIRAS_DENSITY 0.08
+    #define THYSTAME_DENSITY 0.05
+    #define MAX_CLIENTS 10
+
 typedef struct subscribed_s {
     char team_uuid[MAX_UUID_LENGTH];
     char user_uuid[MAX_UUID_LENGTH];
@@ -247,6 +256,9 @@ struct char_tab_head {
 
 void free_char_tab_list(struct char_tab_head *head);
 void display_char_tab_list(struct char_tab_head *head);
+int count_char_tab_list(struct char_tab_head *head);
+void random_char_tab_list(struct char_tab_head *head);
+
 
 typedef struct args_config_s {
     int port;
@@ -261,5 +273,6 @@ args_config_t *init_args_config(void);
 void display_args_config(args_config_t *args);
 void free_args_config(args_config_t *args);
 int fill_args_conf(args_config_t *args, int argc, char **argv);
+struct char_tab_head *generate_ressourse_list(int x, int y);
 
 #endif /* !ZAPPY_SERVER_H_ */

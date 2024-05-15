@@ -26,3 +26,38 @@ void display_char_tab_list(struct char_tab_head *head)
 
     TAILQ_FOREACH(n1, head, next) { printf("%s\n", n1->str); }
 }
+
+int count_char_tab_list(struct char_tab_head *head)
+{
+    char_tab_t *n1 = TAILQ_FIRST(head);
+    int i = 0;
+
+    while (n1 != NULL) {
+        i++;
+        n1 = TAILQ_NEXT(n1, next);
+    }
+    return i;
+}
+
+void random_char_tab_list(struct char_tab_head *head)
+{
+    char_tab_t *n1 = TAILQ_FIRST(head);
+    char_tab_t *n2 = NULL;
+    char_tab_t *n3 = NULL;
+    char *tmp = NULL;
+    int i = 0;
+    int j = 0;
+
+    while (n1 != NULL) {
+        n2 = n1;
+        n1 = TAILQ_NEXT(n1, next);
+        j = rand() % count_char_tab_list(head);
+        n3 = TAILQ_FIRST(head);
+        for (i = 0; i < j; i++) {
+            n3 = TAILQ_NEXT(n3, next);
+        }
+        tmp = n2->str;
+        n2->str = n3->str;
+        n3->str = tmp;
+    }
+}

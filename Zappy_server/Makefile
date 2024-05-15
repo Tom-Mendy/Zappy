@@ -23,6 +23,7 @@ SRC			=	myteams_server.c					\
 				linked_list/free_list.c				\
 				linked_list/free_users.c			\
 				argument_function.c					\
+				generate_ressourse_list.c			\
 				${DIR_TOOLS}						\
 				${DIR_COMMAND}
 

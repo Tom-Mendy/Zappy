@@ -38,6 +38,11 @@ int main(int argc, char **argv)
         return KO;
     }
     display_args_config(args);
+    struct char_tab_head *test = generate_ressourse_list(args->width, args->height);
     free_args_config(args);
+    display_char_tab_list(test);
+    free_char_tab_list(test);
+    free(test);
+
     return OK;
 }
