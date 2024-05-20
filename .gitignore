@@ -12,14 +12,8 @@ unit*
 vgcore*
 tmp
 
-perso*
-Test.c
-
-myteams_cli
-myteams_save.txt
-myteams_server
-
-*intermediate
+zappy_server
+zappy_cli
 
 # Prerequisites
 *.d
@@ -44,6 +38,7 @@ myteams_server
 *.a
 *.la
 *.lo
+*.so
 
 # Shared objects (inc. Windows DLLs)
 *.dll
@@ -72,10 +67,3 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-logging_client.h
-logging_server.h
-
-*.so
-
-save.txt
-notes.txt
