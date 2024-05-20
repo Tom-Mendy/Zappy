@@ -245,6 +245,10 @@ int add_thread(teams_server_t *teams_server, char **command_line, int nb_args,
 
 
 
+
+
+
+
 typedef struct char_tab_s {
     char *str;
     TAILQ_ENTRY(char_tab_s) next;
@@ -287,8 +291,18 @@ int fill_args_conf(args_config_t *args, int argc, char **argv);
 // zappy_server functions
 int zappy_server(args_config_t *args);
 struct char_tab_head *generate_ressourse_list(int x, int y);
+
+// map_tile functions
 map_tile_t **generate_map_tile(int x, int y);
 void free_map_tile(map_tile_t **map_tile);
+void put_resource_on_map_tile(map_tile_t **map_tile,
+    struct char_tab_head *head, int x, int y);
+map_tile_t **setup_map_tile(int x, int y);
+void display_map_tile(map_tile_t **map_tile);
 
+// int array functions
+int **generate_int_array(int x, int y);
+void free_int_array(int **possible_coordinate);
+void shuffle_int_array(int **array, int n);
 
 #endif /* !ZAPPY_SERVER_H_ */
