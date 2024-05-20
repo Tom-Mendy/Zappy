@@ -30,7 +30,6 @@ void display_args_config(args_config_t *args)
     display_char_tab_list(&(args->names));
     printf("Clients Number: %d\n", args->clientsNb);
     printf("Frequency: %.2f\n", args->freq);
-    return OK;
 }
 
 void free_args_config(args_config_t *args)

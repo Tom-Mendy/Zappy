@@ -24,7 +24,7 @@ SRC			=	zappy_server.c						\
 				linked_list/free_users.c			\
 				argument_function.c					\
 				generate_ressourse_list.c			\
-				generate_tile_map.c					\
+				map_tile_function.c					\
 				${DIR_TOOLS}						\
 				${DIR_COMMAND}
 

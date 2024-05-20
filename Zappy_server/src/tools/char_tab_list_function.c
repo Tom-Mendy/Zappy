@@ -15,7 +15,10 @@ void free_char_tab_list(struct char_tab_head *head)
     while (n1 != NULL) {
         n2 = n1;
         n1 = TAILQ_NEXT(n1, next);
-        free(n2->str);
+        if (n2->str != NULL) {
+            free(n2->str);
+            n2->str = NULL;
+        }
         free(n2);
     }
 }

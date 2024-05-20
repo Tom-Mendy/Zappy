@@ -287,7 +287,8 @@ int fill_args_conf(args_config_t *args, int argc, char **argv);
 // zappy_server functions
 int zappy_server(args_config_t *args);
 struct char_tab_head *generate_ressourse_list(int x, int y);
-map_tile_t **generate_tile_map(int x, int y);
+map_tile_t **generate_map_tile(int x, int y);
+void free_map_tile(map_tile_t **map_tile);
 
 
 #endif /* !ZAPPY_SERVER_H_ */
