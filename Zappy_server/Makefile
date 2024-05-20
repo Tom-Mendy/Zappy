@@ -5,7 +5,7 @@
 ## makefile
 ##
 
-SRC			=	myteams_server.c					\
+SRC			=	zappy_server.c						\
 				handle_client.c						\
 				scan_fd.c							\
 				init_server.c						\
@@ -24,6 +24,7 @@ SRC			=	myteams_server.c					\
 				linked_list/free_users.c			\
 				argument_function.c					\
 				generate_ressourse_list.c			\
+				generate_tile_map.c					\
 				${DIR_TOOLS}						\
 				${DIR_COMMAND}
 

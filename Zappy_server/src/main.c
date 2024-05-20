@@ -31,6 +31,7 @@ int main(int argc, char **argv)
 {
     args_config_t *args = NULL;
     struct char_tab_head *resourse_list = NULL;
+    srand(time(NULL));
 
     if (strcmp(argv[1], "-help") == 0) {
         help();

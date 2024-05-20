@@ -175,9 +175,10 @@ void free_threads(struct threadhead *head);
 void free_channels(struct channelhead *head);
 void free_teams(struct teamhead *head);
 
-// Server functions
+// Tools functions
 void free_array(char **array);
-int myteams_server(int port);
+
+// Server functions
 int init_server(teams_server_t *teams_server, int port);
 void init_buffer_struct(buffer_t *buffer, int *my_socket);
 int scan_fd(teams_server_t *teams_server);
@@ -254,11 +255,13 @@ struct char_tab_head {
     struct char_tab_s **tqh_last;
 };
 
+// char_tab functions
 void free_char_tab_list(struct char_tab_head *head);
 void display_char_tab_list(struct char_tab_head *head);
 int count_char_tab_list(struct char_tab_head *head);
 void random_char_tab_list(struct char_tab_head *head);
 
+////////////////////////////////////////
 
 typedef struct args_config_s {
     int port;
@@ -269,10 +272,22 @@ typedef struct args_config_s {
     struct char_tab_head names;
 } args_config_t;
 
+typedef struct map_tile_s {
+    int x;
+    int y;
+    struct char_tab_head resources;
+} map_tile_t;
+
+// args_config functions
 args_config_t *init_args_config(void);
 void display_args_config(args_config_t *args);
 void free_args_config(args_config_t *args);
 int fill_args_conf(args_config_t *args, int argc, char **argv);
+
+// zappy_server functions
+int zappy_server(args_config_t *args);
 struct char_tab_head *generate_ressourse_list(int x, int y);
+map_tile_t **generate_tile_map(int x, int y);
+
 
 #endif /* !ZAPPY_SERVER_H_ */

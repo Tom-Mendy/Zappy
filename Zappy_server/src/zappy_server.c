@@ -66,12 +66,12 @@ int close_server(teams_server_t *teams_server)
     return OK;
 }
 
-int myteams_server(int port)
+int zappy_server(args_config_t *args)
 {
     teams_server_t *teams_server = calloc(sizeof(teams_server_t), 1);
 
     signal(SIGINT, signal_handler);
-    if (init_server(teams_server, port) == KO) {
+    if (init_server(teams_server, args->port) == KO) {
         return ERROR;
     }
     read_info_from_save_file(teams_server);
